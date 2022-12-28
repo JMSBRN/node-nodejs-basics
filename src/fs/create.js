@@ -1,19 +1,17 @@
-import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { existsSync, appendFile } from 'fs';
 
 const _filename = fileURLToPath(import.meta.url);
-const _dirname = dirname(_filename)
+const _dirname = dirname(_filename);
 const path = `${_dirname}/fresh.txt`;
-const create = () => {
- if ( fs.existsSync(path)) {
+const create = (pathNewFile) => {
+ if (existsSync(pathNewFile)) {
         throw new Error('FS operation failed')
     } else {
-        fs.appendFile(path, 'I am fresh and young', (err) => {
+        appendFile(pathNewFile, 'I am fresh and young', (err) => {
           if(err) throw err;    
-          console.log(`file created in folder  ${_dirname}`); 
         })
     }
 };
-
-create();
+create(path);
