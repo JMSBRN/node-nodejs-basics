@@ -8,6 +8,7 @@ import {
   mkdir,
   renameSync,
   unlinkSync,
+  readFileSync,
 } from "fs";
 const getDirname = (importMetaUrl) => {
   const _filename = fileURLToPath(importMetaUrl);
@@ -72,5 +73,14 @@ const list = async (pathToDir) => {
     throw new Error("FS operation failed");
   }
 };
+const read = async (pathToFolder, file) => {
+  const pathToFile = path.join(pathToFolder, file);
+  if (existsSync(pathToFile)) {
+    const data = readFileSync(pathToFile, "utf8");
+    console.log(data);
+  } else {
+    throw new Error("FS operation failed");
+  }
+};
 
-export { getDirname, create, copy, rename, remove, list };
+export { getDirname, create, copy, rename, remove, list, read };
