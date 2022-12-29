@@ -1,4 +1,5 @@
-import path, { join } from "path";
+import path, { join, dirname } from "path";
+import { fileURLToPath } from "url";
 import {
   existsSync,
   appendFile,
@@ -6,8 +7,13 @@ import {
   copyFile,
   mkdir,
   renameSync,
+  unlinkSync
 } from "fs";
-
+const getDirname = (importMetaUrl) => {
+  const _filename = fileURLToPath(importMetaUrl);
+  const _dirname = dirname(_filename);
+  return _dirname;
+};
 const create = (path) => {
   if (existsSync(path)) {
     throw new Error("FS operation failed");
@@ -47,4 +53,15 @@ const rename = async (pathToFolder, oldFile, newFile) => {
   }
 };
 
-export { create, copy, rename };
+const remove = async (pathToFolder, fileToDelete) => {
+  const pathWithFile = join(pathToFolder, fileToDelete);
+  if (existsSync(pathWithFile)) {
+      unlinkSync(pathWithFile, (err) => {
+          if (err) throw err;
+      })
+  } else {
+      throw new Error('FS operation failed')
+  }
+};
+
+export { getDirname, create, copy, rename, remove };

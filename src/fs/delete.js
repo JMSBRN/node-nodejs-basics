@@ -1,5 +1,7 @@
-const remove = async () => {
-    // Write your code here 
-};
+import { getDirname, remove } from './files/modules.js'
+import path from 'path';
 
-await remove();
+const _dirname = getDirname(import.meta.url);
+const pathToFolder = path.join(_dirname, '/files');
+
+await remove(pathToFolder,'fileToRemove.txt');
