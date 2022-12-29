@@ -1,5 +1,5 @@
 import path from 'path';
-import { copy, getDirname } from './files/modules.js';
+import { copy, getDirname } from './modules.js';
 
 const _dirname = getDirname(import.meta.url);
 const srcDir = path.join(_dirname, 'files');
