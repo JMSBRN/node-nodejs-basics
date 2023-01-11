@@ -1,5 +1,8 @@
-const copy = async () => {
-    // Write your code here 
-};
+import path from 'path';
+import { copy, getDirname } from './modules.js';
 
-await copy();
+const _dirname = getDirname(import.meta.url);
+const srcDir = path.join(_dirname, 'files');
+const destDir = path.join(_dirname, 'files_copy');
+
+copy(srcDir, destDir);

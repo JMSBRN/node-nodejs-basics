@@ -1,5 +1,6 @@
-const create = async () => {
-    // Write your code here 
-};
+import {create, getDirname}  from './modules.js';
 
-await create();
+const _dirname = getDirname(import.meta.url);
+const path = `${_dirname}/fresh.txt`;
+
+create(path);
